@@ -1,0 +1,49 @@
+<section class="education">
+  <div class="d-flex justify-content-center align-items-center education--add">
+    <h2 class="education--h2">Educación</h2>
+    <button *ngIf="isLogged" class="add" (click)="toggleFormEd()">+</button>
+  </div>
+  <div [ngClass]="formEd ? 'show' : 'hidden'">
+    <form
+      [formGroup]="form"
+      class="d-flex flex-column align-content-center justify-content-evenly"
+      (ngSubmit)="addEducacion()"
+    >
+      <label for="lugar">Institución</label>
+      <input formControlName="lugar" type="text" name="lugar" class="mb-2" />
+      <label for="titulo">Título o Certificación</label>
+      <input formControlName="titulo" type="text" name="titulo" class="mb-2" />
+      <label for="urlCert">Url del certificado (opcional)</label>
+      <input
+        formControlName="urlCert"
+        type="text"
+        name="urlCert"
+        class="mb-2"
+      />
+      <button class="btn btn-primary my-2 align-self-center">Agregar</button>
+    </form>
+  </div>
+  <ul
+    class="list-unstyled d-flex flex-column flex-md-row align-items-center flex-md-wrap justify-content-md-evenly education--list"
+  >
+    <li
+      *ngFor="let edu of educacions"
+      class="bg-light d-flex my-2 flex-column align-items-center education--items"
+
+    >
+      <h3 class="py-1 education--h3">Institución</h3>
+      <img *ngIf="isLogged" class="btn-delete" (click)="deleteEducacion(edu.id)" src="../../../assets/delete.svg" alt="Delete button" class="btn-delete">
+      <h4>{{ edu.lugar }}</h4>
+      <h3 class="py-1 education--h3">Título</h3>
+      <p>{{ edu.titulo }}</p>
+      <a
+        *ngIf="edu.urlCert.length > 0"
+        class="btn btn-dark"
+        href="{{ edu.urlCert }}"
+        target="_blank"
+        title="Enlace a certificado"
+        >Certificación</a
+      >
+    </li>
+  </ul>
+</section>

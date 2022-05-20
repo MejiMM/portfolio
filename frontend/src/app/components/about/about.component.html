@@ -1,0 +1,21 @@
+<div class="container-fluid about">
+    <div class="row justify-content-evenly">
+        <section class="col-xs-12 col-md-4 profile">
+            <h3>
+                {{user.nombre}} <span>{{user.apellido}}</span>
+            </h3>  
+            <img src="../../../assets/Sin título.png" alt="Foto de perfil" class="profile--img">
+        </section>
+        <section class="col-xs-12 col-md-8 job">
+            <h3 class="job--title">
+                Desarrollador Web Full Stack Jr.
+            </h3>
+            <img *ngIf="getIsLogged()" (click)="editDescription()" src="../../../assets/edit.svg" alt="Edit button" class="isEdit">
+            <p *ngIf="!getIsEditEnabled()" class="job--description">
+                {{user.descripcion}}
+            </p>
+                <textarea *ngIf="getIsEditEnabled()" rows="6" wrap="hard"  type="textarea" [(ngModel)]="descripcionUser" class="inputEdit" ></textarea>
+                <button *ngIf="getIsEditEnabled()" class="btn btn-secondary" (click)="editDescripcion()">Editar</button>
+        </section>
+    </div>
+</div>
