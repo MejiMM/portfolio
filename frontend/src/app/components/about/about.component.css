@@ -57,11 +57,14 @@ h3 span {
     padding-top: 5%;
 }
 
-.isEdit {
+.isEdit, .spinner-border {
     position: relative;
     cursor: pointer;   
     right: -90%;
     top: 5%;
+}
+
+.isEdit {    
     width: 8%;
 }
 

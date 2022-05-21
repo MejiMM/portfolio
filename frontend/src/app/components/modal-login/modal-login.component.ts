@@ -6,6 +6,7 @@ import { LoginService } from 'src/app/services/login.service';
 @Component({
   selector: 'app-modal-login',
   templateUrl: './modal-login.component.html',
+  preserveWhitespaces: false,
   styleUrls: ['./modal-login.component.css']
 })
 export class ModalLoginComponent implements OnInit {

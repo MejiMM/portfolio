@@ -6,6 +6,7 @@ import { User } from 'src/app/services/user.model';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
+  preserveWhitespaces: false,
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
@@ -14,11 +15,20 @@ export class AboutComponent implements OnInit {
   user!: User;
   private isEditEnabled :boolean = false;
   descripcionUser! :String;
+  loading :boolean = false;
 
   constructor(private portfolioServ: PortfolioService, private login :LoginService) { 
 
+    
+
     this.login.getSession().subscribe( e => {
-      if(e.tokenDeAcceso) this.isLogged = true;
+      if(e.tokenDeAcceso) {
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+        }, 400);
+        this.isLogged = true
+      };
     })
   }
 

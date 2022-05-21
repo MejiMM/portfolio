@@ -10,7 +10,10 @@
             <h3 class="job--title">
                 Desarrollador Web Full Stack Jr.
             </h3>
-            <img *ngIf="getIsLogged()" (click)="editDescription()" src="../../../assets/edit.svg" alt="Edit button" class="isEdit">
+            <div *ngIf="loading" class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <img *ngIf="getIsLogged() && !loading" (click)="editDescription()" src="../../../assets/edit.svg" alt="Edit button" class="isEdit">
             <p *ngIf="!getIsEditEnabled()" class="job--description">
                 {{user.descripcion}}
             </p>

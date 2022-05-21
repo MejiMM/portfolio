@@ -7,6 +7,7 @@ import { PortfolioService } from 'src/app/services/portfolio.service';
 @Component({
   selector: 'app-education',
   templateUrl: './education.component.html',
+  preserveWhitespaces: false,
   styleUrls: ['./education.component.css']
 })
 export class EducationComponent implements OnInit {
@@ -16,6 +17,7 @@ export class EducationComponent implements OnInit {
   isLogged :boolean = false;
   form :FormGroup;  
   formEd :boolean = false;
+  loading :boolean = false;
   
   constructor(private portfolioServ :PortfolioService, private login :LoginService, private formBuilder :FormBuilder) {
 
@@ -35,6 +37,10 @@ export class EducationComponent implements OnInit {
     //Detect changes in the token to render the portfolio edition
     this.login.getSession().subscribe(e => {
       if(e.tokenDeAcceso) {
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+        }, 400);
         this.isLogged = true;
       }
     });

@@ -4,14 +4,14 @@ import {
   state,
   style,
   animate,
-  transition,
-  keyframes,
+  transition
 } from '@angular/animations';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
+  preserveWhitespaces: false,
   styleUrls: ['./welcome.component.css'],
   
   //The animations that are shown when entering the web portfolio
