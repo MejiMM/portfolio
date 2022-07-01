@@ -7,11 +7,13 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 })
 export class LoginService {
 
-  private url :String = "https://portfolio-springrest.herokuapp.com";
+  private url :String = "https://josem-portfolio.herokuapp.com/";
   currentUserSubject :BehaviorSubject<any>;
+  currentLoaderSubject :BehaviorSubject<boolean>;
 
   constructor(private http :HttpClient) { 
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem("user") || "{}"));
+    this.currentLoaderSubject = new BehaviorSubject<boolean>(false);
   }
 
   /**

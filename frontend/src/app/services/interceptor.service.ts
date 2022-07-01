@@ -5,7 +5,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -19,16 +19,20 @@ export class InterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let user = this.loginService.getUserAuth();
+    this.loginService.currentLoaderSubject.next(true);
 
-    if (user && req.method !== "GET") {
+    if (user && req.method !== 'GET') {
       req = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${user}`
-        }
+          Authorization: `Bearer ${user}`,
+        },
       });
-      
     }
-      
-    return next.handle(req);
+
+    return next.handle(req).pipe(
+      finalize( () => {
+        this.loginService.currentLoaderSubject.next(false);
+      })
+    );
   }
 }
