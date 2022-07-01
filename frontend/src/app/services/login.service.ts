@@ -7,7 +7,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 })
 export class LoginService {
 
-  private url :String = "https://josem-portfolio.herokuapp.com/";
+  private url :String = "https://josem-portfolio.herokuapp.com";
   currentUserSubject :BehaviorSubject<any>;
   currentLoaderSubject :BehaviorSubject<boolean>;
 

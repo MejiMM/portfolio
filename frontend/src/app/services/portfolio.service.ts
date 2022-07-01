@@ -9,7 +9,7 @@ import { Educacion } from './educacion.model';
 })
 export class PortfolioService {
 
-  private apiUrl :String = "https://josem-portfolio.herokuapp.com/";
+  private apiUrl :String = "https://josem-portfolio.herokuapp.com";
 
   constructor(private http: HttpClient) {  }
 
