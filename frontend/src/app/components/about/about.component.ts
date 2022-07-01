@@ -6,33 +6,27 @@ import { User } from 'src/app/services/user.model';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  preserveWhitespaces: false,
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
 
-  private isLogged :boolean = false;
+  private isLogged: boolean = false;
   user!: User;
-  private isEditEnabled :boolean = false;
-  descripcionUser! :String;
-  loading :boolean = false;
+  private isEditEnabled: boolean = false;
+  descripcionUser!: String;
+  loading?: boolean = true;
 
-  constructor(private portfolioServ: PortfolioService, private login :LoginService) { 
+  constructor(private portfolioServ: PortfolioService, private login: LoginService) {
 
-    
+    this.login.currentLoaderSubject.asObservable().subscribe(e => this.loading = e);
 
-    this.login.getSession().subscribe( e => {
-      if(e.tokenDeAcceso) {
-        this.loading = true;
-        setTimeout(() => {
-          this.loading = false;
-        }, 400);
+    this.login.getSession().subscribe(e => {
+      if (e.tokenDeAcceso) {
         this.isLogged = true
       };
     })
   }
 
- 
   ngOnInit(): void {
     //Bring the user data to later show in the template
     this.portfolioServ.getUser().subscribe(e => {
@@ -61,7 +55,7 @@ export class AboutComponent implements OnInit {
   editDescripcion() {
     this.isEditEnabled = !this.isEditEnabled;
 
-    const user :User = {
+    const user: User = {
       nombre: this.user.nombre,
       apellido: this.user.apellido,
       descripcion: this.descripcionUser
